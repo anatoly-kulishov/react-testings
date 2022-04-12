@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SimpleTests 1 1`] = `
+<input
+  placeholder="input value..."
+  type="text"
+  value=""
+/>
+`;
+
+exports[`TEST SimpleTests 1 1`] = `
+<input
+  placeholder="input value..."
+  type="text"
+  value=""
+/>
+`;
