@@ -1,6 +1,8 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import axios from "axios";
+import userEvent from "@testing-library/user-event";
+import { renderTestApp } from "../../tests/helpers/renderTestApp";
 import Users from "./Users";
 
 jest.mock('axios');
@@ -28,13 +30,24 @@ describe('Users test', () => {
     }
   })
   
-  test('1', async () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  })
+  
+  test('renders learn react link', async () => {
     mockedAxios.get.mockReturnValue(response);
-    render(<Users/>);
+    renderTestApp(<Users/>, []);
     const users = await screen.findAllByTestId('user-item');
     expect(users.length).toBe(3);
     expect(users).toMatchSnapshot();
   });
   
+  test('test redirect to details page', async () => {
+    mockedAxios.get.mockReturnValue(response);
+    renderTestApp(<Users/>, []);
+    const users = await screen.findAllByTestId('user-item');
+    await userEvent.click(users[0]);
+    expect(screen.getByTestId('user-page')).toBeInTheDocument();
+  })
 })
 

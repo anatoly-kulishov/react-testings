@@ -1,5 +1,8 @@
-import React, {StrictMode} from 'react';
-import {createRoot} from 'react-dom/client';
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from "react-router-dom";
+import { createReduxStore } from "./store/store";
+import { Provider } from "react-redux";
 import App from './App';
 
 // 👇️ IMPORTANT: use correct ID of your root element
@@ -11,7 +14,11 @@ const root = createRoot(rootElement!);
 // const root = createRoot(rootElement!);
 
 root.render(
-  <StrictMode>
-    <App/>
-  </StrictMode>,
+  <React.StrictMode>
+    <Provider store={createReduxStore()}>
+      <BrowserRouter>
+        <App/>
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>,
 );
